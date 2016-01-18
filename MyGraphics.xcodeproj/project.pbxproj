@@ -1,0 +1,390 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		56E546971C37919700935EB5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E546961C37919700935EB5 /* AppDelegate.swift */; };
+		56E5469C1C37919700935EB5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56E5469A1C37919700935EB5 /* Main.storyboard */; };
+		56E5469F1C37919700935EB5 /* MyGraphics.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 56E5469D1C37919700935EB5 /* MyGraphics.xcdatamodeld */; };
+		56E546A11C37919700935EB5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56E546A01C37919700935EB5 /* Assets.xcassets */; };
+		56E546A41C37919700935EB5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56E546A21C37919700935EB5 /* LaunchScreen.storyboard */; };
+		56E546AC1C37A8D900935EB5 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E546AB1C37A8D900935EB5 /* CollectionViewController.swift */; };
+		56E546AE1C37A9A900935EB5 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E546AD1C37A9A900935EB5 /* CollectionViewCell.swift */; };
+		56E546B01C37B26D00935EB5 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E546AF1C37B26D00935EB5 /* ImageViewController.swift */; };
+		56E5BD221C4A1E190068C46C /* CollectionViewWaterfallLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E5BD211C4A1E190068C46C /* CollectionViewWaterfallLayout.swift */; };
+		56E5BD241C4A3BC00068C46C /* EntranceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E5BD231C4A3BC00068C46C /* EntranceViewController.swift */; };
+		56EFDDE21C4C9C3B0094C3FB /* PasscodeLock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56EFDDE11C4C9C3B0094C3FB /* PasscodeLock.framework */; };
+		56EFDDE71C4CB0B60094C3FB /* PasscodeLockConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56EFDDE51C4CB0B60094C3FB /* PasscodeLockConfiguration.swift */; };
+		56EFDDE81C4CB0B60094C3FB /* UserDefaultsPasscodeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56EFDDE61C4CB0B60094C3FB /* UserDefaultsPasscodeRepository.swift */; };
+		56EFDDEA1C4CB2010094C3FB /* PasscodeSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56EFDDE91C4CB2010094C3FB /* PasscodeSettingsViewController.swift */; };
+		56EFDDEC1C4CD4280094C3FB /* Haneke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56EFDDEB1C4CD4280094C3FB /* Haneke.framework */; };
+		56EFDDEE1C4CD4310094C3FB /* ImageViewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56EFDDED1C4CD4310094C3FB /* ImageViewer.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		56E546931C37919700935EB5 /* MyGraphics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyGraphics.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		56E546961C37919700935EB5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		56E5469B1C37919700935EB5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		56E5469E1C37919700935EB5 /* MyGraphics.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyGraphics.xcdatamodel; sourceTree = "<group>"; };
+		56E546A01C37919700935EB5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		56E546A31C37919700935EB5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		56E546A51C37919700935EB5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		56E546AB1C37A8D900935EB5 /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
+		56E546AD1C37A9A900935EB5 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		56E546AF1C37B26D00935EB5 /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
+		56E5BD211C4A1E190068C46C /* CollectionViewWaterfallLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewWaterfallLayout.swift; sourceTree = "<group>"; };
+		56E5BD231C4A3BC00068C46C /* EntranceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntranceViewController.swift; sourceTree = "<group>"; };
+		56EFDDE11C4C9C3B0094C3FB /* PasscodeLock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PasscodeLock.framework; path = Carthage/Build/iOS/PasscodeLock.framework; sourceTree = "<group>"; };
+		56EFDDE51C4CB0B60094C3FB /* PasscodeLockConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeLockConfiguration.swift; sourceTree = "<group>"; };
+		56EFDDE61C4CB0B60094C3FB /* UserDefaultsPasscodeRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsPasscodeRepository.swift; sourceTree = "<group>"; };
+		56EFDDE91C4CB2010094C3FB /* PasscodeSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeSettingsViewController.swift; sourceTree = "<group>"; };
+		56EFDDEB1C4CD4280094C3FB /* Haneke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Haneke.framework; path = Carthage/Build/iOS/Haneke.framework; sourceTree = "<group>"; };
+		56EFDDED1C4CD4310094C3FB /* ImageViewer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageViewer.framework; path = Carthage/Build/iOS/ImageViewer.framework; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		56E546901C37919700935EB5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				56EFDDE21C4C9C3B0094C3FB /* PasscodeLock.framework in Frameworks */,
+				56EFDDEC1C4CD4280094C3FB /* Haneke.framework in Frameworks */,
+				56EFDDEE1C4CD4310094C3FB /* ImageViewer.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		56E5468A1C37919700935EB5 = {
+			isa = PBXGroup;
+			children = (
+				56EFDDED1C4CD4310094C3FB /* ImageViewer.framework */,
+				56EFDDEB1C4CD4280094C3FB /* Haneke.framework */,
+				56EFDDE11C4C9C3B0094C3FB /* PasscodeLock.framework */,
+				56E546951C37919700935EB5 /* MyGraphics */,
+				56E546941C37919700935EB5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		56E546941C37919700935EB5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				56E546931C37919700935EB5 /* MyGraphics.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		56E546951C37919700935EB5 /* MyGraphics */ = {
+			isa = PBXGroup;
+			children = (
+				56EFDDE41C4CB0710094C3FB /* PasscodeLockFile */,
+				56E5BD211C4A1E190068C46C /* CollectionViewWaterfallLayout.swift */,
+				56E546961C37919700935EB5 /* AppDelegate.swift */,
+				56E5BD231C4A3BC00068C46C /* EntranceViewController.swift */,
+				56E546AB1C37A8D900935EB5 /* CollectionViewController.swift */,
+				56E546AD1C37A9A900935EB5 /* CollectionViewCell.swift */,
+				56E546AF1C37B26D00935EB5 /* ImageViewController.swift */,
+				56E5469A1C37919700935EB5 /* Main.storyboard */,
+				56E546A01C37919700935EB5 /* Assets.xcassets */,
+				56E546A21C37919700935EB5 /* LaunchScreen.storyboard */,
+				56E546A51C37919700935EB5 /* Info.plist */,
+				56E5469D1C37919700935EB5 /* MyGraphics.xcdatamodeld */,
+			);
+			path = MyGraphics;
+			sourceTree = "<group>";
+		};
+		56EFDDE41C4CB0710094C3FB /* PasscodeLockFile */ = {
+			isa = PBXGroup;
+			children = (
+				56EFDDE91C4CB2010094C3FB /* PasscodeSettingsViewController.swift */,
+				56EFDDE51C4CB0B60094C3FB /* PasscodeLockConfiguration.swift */,
+				56EFDDE61C4CB0B60094C3FB /* UserDefaultsPasscodeRepository.swift */,
+			);
+			name = PasscodeLockFile;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		56E546921C37919700935EB5 /* MyGraphics */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 56E546A81C37919700935EB5 /* Build configuration list for PBXNativeTarget "MyGraphics" */;
+			buildPhases = (
+				56E5468F1C37919700935EB5 /* Sources */,
+				56E546901C37919700935EB5 /* Frameworks */,
+				56E546911C37919700935EB5 /* Resources */,
+				56EFDDE31C4C9C5A0094C3FB /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MyGraphics;
+			productName = MyGraphics;
+			productReference = 56E546931C37919700935EB5 /* MyGraphics.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		56E5468B1C37919700935EB5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = Linsw;
+				TargetAttributes = {
+					56E546921C37919700935EB5 = {
+						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 4F6NMKB449;
+					};
+				};
+			};
+			buildConfigurationList = 56E5468E1C37919700935EB5 /* Build configuration list for PBXProject "MyGraphics" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 56E5468A1C37919700935EB5;
+			productRefGroup = 56E546941C37919700935EB5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				56E546921C37919700935EB5 /* MyGraphics */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		56E546911C37919700935EB5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				56E546A41C37919700935EB5 /* LaunchScreen.storyboard in Resources */,
+				56E546A11C37919700935EB5 /* Assets.xcassets in Resources */,
+				56E5469C1C37919700935EB5 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		56EFDDE31C4C9C5A0094C3FB /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/PasscodeLock.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Haneke.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ImageViewer.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = "/usr/local/bin/carthage copy-frameworks";
+			shellScript = "";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		56E5468F1C37919700935EB5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				56E546AC1C37A8D900935EB5 /* CollectionViewController.swift in Sources */,
+				56E5469F1C37919700935EB5 /* MyGraphics.xcdatamodeld in Sources */,
+				56E546B01C37B26D00935EB5 /* ImageViewController.swift in Sources */,
+				56E546AE1C37A9A900935EB5 /* CollectionViewCell.swift in Sources */,
+				56EFDDE81C4CB0B60094C3FB /* UserDefaultsPasscodeRepository.swift in Sources */,
+				56E5BD241C4A3BC00068C46C /* EntranceViewController.swift in Sources */,
+				56EFDDE71C4CB0B60094C3FB /* PasscodeLockConfiguration.swift in Sources */,
+				56E546971C37919700935EB5 /* AppDelegate.swift in Sources */,
+				56E5BD221C4A1E190068C46C /* CollectionViewWaterfallLayout.swift in Sources */,
+				56EFDDEA1C4CB2010094C3FB /* PasscodeSettingsViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		56E5469A1C37919700935EB5 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				56E5469B1C37919700935EB5 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		56E546A21C37919700935EB5 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				56E546A31C37919700935EB5 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		56E546A61C37919700935EB5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		56E546A71C37919700935EB5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		56E546A91C37919700935EB5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = MyGraphics/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = lsw.self.MyGraphics;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		56E546AA1C37919700935EB5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = MyGraphics/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = lsw.self.MyGraphics;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		56E5468E1C37919700935EB5 /* Build configuration list for PBXProject "MyGraphics" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				56E546A61C37919700935EB5 /* Debug */,
+				56E546A71C37919700935EB5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		56E546A81C37919700935EB5 /* Build configuration list for PBXNativeTarget "MyGraphics" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				56E546A91C37919700935EB5 /* Debug */,
+				56E546AA1C37919700935EB5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		56E5469D1C37919700935EB5 /* MyGraphics.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				56E5469E1C37919700935EB5 /* MyGraphics.xcdatamodel */,
+			);
+			currentVersion = 56E5469E1C37919700935EB5 /* MyGraphics.xcdatamodel */;
+			path = MyGraphics.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 56E5468B1C37919700935EB5 /* Project object */;
+}
