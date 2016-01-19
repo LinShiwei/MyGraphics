@@ -9,15 +9,100 @@
 import UIKit
 import CoreData
 import Photos
+import ImageViewer
 
 class CollectionViewController: UICollectionViewController,CollectionViewWaterfallLayoutDelegate  {
 
+    enum ProviderEditState {
+        case Normal
+        case Delete
+    }
+    var currentEditState = ProviderEditState.Normal
     let appFilePath = (NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0]) + "/"
     var myImageCollection=[NSManagedObject]()
-    let hour:Double=1.0
+    let hour:Double=0.0
+    var imagePaths = [String]()
     
-    @IBAction func saveToPhotoAlbum(sender: UIBarButtonItem) {
+    @IBOutlet weak var deleteButton: UIBarButtonItem!
+    @IBAction func cellCloseButton(sender: UIButton) {
+        let cell = (sender.superview)!.superview as! CollectionViewCell
+        let indexPath = self.collectionView!.indexPathForCell(cell)
         
+        let managedContext = getManagedContext()
+        managedContext.deleteObject(myImageCollection[indexPath!.row])
+        do {
+            try managedContext.save()
+        }
+        catch let error as NSError {
+            print("Could not save \(error), \(error.userInfo)")
+        }
+        
+        self.myImageCollection.removeAtIndex(indexPath!.row)
+        self.collectionView!.performBatchUpdates({
+            self.collectionView!.deleteItemsAtIndexPaths([indexPath!])
+            return
+            }, completion: nil)
+    }
+    @IBAction func chooseImageToDelete(sender: UIBarButtonItem) {
+        if (self.currentEditState == ProviderEditState.Normal)
+        {
+            self.deleteButton.title = "OK";
+            self.currentEditState = ProviderEditState.Delete;
+            
+            for cell in self.collectionView!.visibleCells() as! [CollectionViewCell]
+            {
+                cell.closeButton.hidden = false
+                cell.cellImage.userInteractionEnabled = false
+            }
+        }else{
+            self.deleteButton.title = "delete"
+            self.currentEditState = ProviderEditState.Normal
+            
+            for cell in self.collectionView!.visibleCells() as! [CollectionViewCell]
+            {
+                cell.closeButton.hidden = true
+                cell.cellImage.userInteractionEnabled = true
+            }
+        }
+
+    }
+    @IBAction func saveToPhotoAlbum(sender: UIBarButtonItem) {
+        if myImageCollection.count > 0{
+            for index in 0...myImageCollection.count - 1 {
+                let imageURL = getImageURL(myImageCollection, indexPathRow: index)
+                imagePaths.append(imageURL)
+               
+            }
+            self.saveNextImage()
+           
+        }else{
+            let alert = UIAlertController(title: "Fail", message: "There is no photo to save", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "OK", style: .Default) { (action: UIAlertAction) -> Void in }
+            alert.addAction(okAction)
+            presentViewController(alert, animated: true, completion: nil)
+
+        }
+    }
+    func saveNextImage(){
+        if imagePaths.count > 0 {
+            let image = getImage(imagePaths.last!)
+             UIImageWriteToSavedPhotosAlbum(image, self, "imageSavedToPhotosAlbum:didFinishSavingWithError:contextInfo:", nil)
+            imagePaths.removeLast()
+        }
+        
+    }
+    func imageSavedToPhotosAlbum(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafePointer<Void>) {
+        if imagePaths.count > 0 {
+            saveNextImage()
+        } else {
+            if imagePaths.count == 0 {
+                let alert = UIAlertController(title: "Success!", message: "Photos have been saved to Album", preferredStyle: .Alert)
+                
+                let okAction = UIAlertAction(title: "OK", style: .Default) { (action: UIAlertAction) -> Void in }
+                alert.addAction(okAction)
+                presentViewController(alert, animated: true, completion: nil)
+            }
+        }
     }
     @IBAction func addImage(sender: AnyObject) {
         let fetchOptions = PHFetchOptions()
@@ -39,7 +124,7 @@ class CollectionViewController: UICollectionViewController,CollectionViewWaterfa
                 imageManager.requestImageForAsset(imageAssets, targetSize: imageSize, contentMode: .AspectFill, options: imageRequestOptions, resultHandler: {image,_ in
                     let name = imageAssets.valueForKey("filename")!
                     let path = self.appFilePath + (name as! String)
-                    let data = UIImageJPEGRepresentation(image!, 0)
+                    let data = UIImageJPEGRepresentation(image!, 1)
                     data!.writeToFile(path, atomically: true)
                     let managedContext = self.getManagedContext()
                     let entity = NSEntityDescription.entityForName("Image", inManagedObjectContext:managedContext)
@@ -57,27 +142,21 @@ class CollectionViewController: UICollectionViewController,CollectionViewWaterfa
             }
             self.collectionView?.reloadData()
         }
-        
-       
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.collectionView?.collectionViewLayout
         let layout = CollectionViewWaterfallLayout()
-        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        layout.sectionInset = UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
         layout.headerInset = UIEdgeInsetsMake(20, 0, 0, 0)
         layout.headerHeight = 0
         layout.footerHeight = 0
-        layout.minimumColumnSpacing = 10
-        layout.minimumInteritemSpacing = 10
+        layout.minimumColumnSpacing = 1
+        layout.minimumInteritemSpacing = 1
         self.collectionView!.collectionViewLayout = layout
-        self.collectionView?.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+        self.collectionView!.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         myImageCollection = fetchImageObject()
- 
-//        self.collectionView!.allowsSelection = true
-//        self.collectionView!.allowsMultipleSelection = true
   
     }
 
@@ -86,27 +165,20 @@ class CollectionViewController: UICollectionViewController,CollectionViewWaterfa
         // Dispose of any resources that can be recreated.
     }
 
-    
+/*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
-        if segue.identifier == "showImage" {
-            //            self.tableView.reloadData()
-            if let indexPath = self.collectionView?.indexPathsForSelectedItems() {
-                let controller = segue.destinationViewController as! ImageViewController
-                controller.indexPathRow = indexPath[0].row
-                
-            }
-        }else{
-            if segue.identifier == "setPassword" {
-               
-            }
+       
+        if segue.identifier == "setPassword" {
+           
         }
+        
     }
-    
+    */
 
     // MARK: UICollectionViewDataSource
 
@@ -124,9 +196,29 @@ class CollectionViewController: UICollectionViewController,CollectionViewWaterfa
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("imageCell", forIndexPath: indexPath) as! CollectionViewCell
         // Configure the cell
-        cell.backgroundColor = UIColor(red: 0.5, green: 0, blue: 0, alpha: 1)
-//        cell.label.text = String(indexPath.row)
-        cell.cellImage.image = getImage(myImageCollection, indexPathRow: indexPath.row)
+        cell.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+        
+        let imageURL = getImageURL(myImageCollection, indexPathRow: indexPath.row)
+        
+        cell.cellImage.setupForImageViewer(NSURL(string: imageURL)!, backgroundColor: UIColor.blackColor())
+        cell.cellImage.image = getImage(imageURL)
+        cell.closeButton.tag = indexPath.row
+//        cellPaths[indexPath.row] =indexPath
+        if(self.currentEditState == ProviderEditState.Normal)
+        {
+            cell.closeButton.hidden = true
+            cell.cellImage.userInteractionEnabled = true
+
+        }
+        else
+        {
+            cell.closeButton.hidden = false
+            cell.cellImage.userInteractionEnabled = false
+
+        }
+        
+    
+        
         return cell
     }
 
@@ -184,12 +276,15 @@ class CollectionViewController: UICollectionViewController,CollectionViewWaterfa
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         return appDelegate.managedObjectContext
     }
-    func getImage(imageObj:[NSManagedObject],indexPathRow:Int)->UIImage{
+    func getImage(imageURL:String)->UIImage{
+        return UIImage(contentsOfFile: imageURL)!
+    }
+    func getImageURL(imageObj:[NSManagedObject],indexPathRow:Int)->String{
         let imageName = imageObj[indexPathRow].valueForKey("name") as! String
         let appFilePath = (NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0]) + "/"
         let path = appFilePath + imageName
-        let image = UIImage(contentsOfFile: path)
-        return image!
+        return path
+        
     }
     // MARK: WaterfallLayoutDelegate
     
@@ -198,20 +293,11 @@ class CollectionViewController: UICollectionViewController,CollectionViewWaterfa
     }
     //MARK: 自定义函数
     func cellSize(imageObj:[NSManagedObject],indexPathRow:Int)->CGSize{
-        let image = getImage(myImageCollection, indexPathRow: indexPathRow)
-        return image.size
+        let imageURL = getImageURL(myImageCollection, indexPathRow: indexPathRow)
+        let image = getImage(imageURL)
+        let size = CGSize(width: image.size.width+9, height: image.size.height+9)
+        return size
     }
-//    lazy var cellSizes: [CGSize] = {
-//        var _cellSizes = [CGSize]()
-//        
-//        for index in 0...self.myImageCollection.count - 1 {
-//            //            let random = Int(arc4random_uniform((UInt32(100))))
-//            let image = getMyImage(self.myImageCollection)
-//            _cellSizes.append(CGSize(width: 10, height: 10))
-//        }
-//        
-//        return _cellSizes
-//    }()
 
 }
 

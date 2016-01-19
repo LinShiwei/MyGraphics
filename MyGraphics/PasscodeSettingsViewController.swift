@@ -13,8 +13,6 @@ class PasscodeSettingsViewController: UIViewController {
     
     @IBOutlet weak var passcodeSwitch: UISwitch!
     @IBOutlet weak var changePasscodeButton: UIButton!
-    @IBOutlet weak var testTextField: UITextField!
-    @IBOutlet weak var testActivityButton: UIButton!
     
     private let configuration: PasscodeLockConfigurationType
     
@@ -81,28 +79,6 @@ class PasscodeSettingsViewController: UIViewController {
         presentViewController(passcodeLock, animated: true, completion: nil)
     }
     
-    @IBAction func testAlertButtonTap(sender: UIButton) {
-        
-        let alertVC = UIAlertController(title: "Test", message: "", preferredStyle: .Alert)
-        
-        alertVC.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
-        
-        presentViewController(alertVC, animated: true, completion: nil)
-        
-    }
-    
-    @IBAction func testActivityButtonTap(sender: UIButton) {
-        
-        let activityVC = UIActivityViewController(activityItems: ["Test"], applicationActivities: nil)
-        
-        activityVC.popoverPresentationController?.sourceView = testActivityButton
-        activityVC.popoverPresentationController?.sourceRect = CGRectMake(10, 20, 0, 0)
-        
-        presentViewController(activityVC, animated: true, completion: nil)
-    }
-    
-    @IBAction func dismissKeyboard() {
-        
-        testTextField.resignFirstResponder()
-    }
+
+
 }

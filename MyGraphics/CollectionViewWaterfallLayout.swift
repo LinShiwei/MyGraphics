@@ -37,7 +37,7 @@ public class CollectionViewWaterfallLayout: UICollectionViewLayout {
     private let unionSize = 20;
     
     //MARK: Public Properties
-    public var columnCount:Int = 2 {//2
+    public var columnCount:Int = 3 {//2
         didSet {
             invalidateIfNotEqual(oldValue, newValue: columnCount)
         }
