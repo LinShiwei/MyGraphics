@@ -65,7 +65,7 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="My collection" id="Inz-Op-Yi3">
-                        <barButtonItem key="leftBarButtonItem" title="delete" id="G4G-Kg-UvY">
+                        <barButtonItem key="leftBarButtonItem" image="delete" id="G4G-Kg-UvY">
                             <connections>
                                 <action selector="chooseImageToDelete:" destination="90N-Rw-FeP" id="V1M-xs-6Lm"/>
                             </connections>
@@ -83,7 +83,7 @@
                             </barButtonItem>
                             <barButtonItem image="setting" id="hkA-dD-oJn">
                                 <connections>
-                                    <segue destination="gjM-2y-kj8" kind="show" id="AAc-DI-TPL"/>
+                                    <segue destination="ydw-Iz-czm" kind="show" id="BR6-7A-3yc"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
@@ -115,83 +115,79 @@
             </objects>
             <point key="canvasLocation" x="430" y="1048"/>
         </scene>
-        <!--Passcode Settings View Controller-->
-        <scene sceneID="qRj-6J-rUy">
+        <!--Passcode Settings Table View Controller-->
+        <scene sceneID="MPJ-lN-Wq4">
             <objects>
-                <viewController id="gjM-2y-kj8" customClass="PasscodeSettingsViewController" customModule="MyGraphics" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ItN-Y9-TY1"/>
-                        <viewControllerLayoutGuide type="bottom" id="cMM-Ag-M8Q"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="7pG-K4-gWV">
+                <tableViewController id="ydw-Iz-czm" customClass="PasscodeSettingsTableViewController" customModule="MyGraphics" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="dUw-7O-3Cf">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AkC-Y3-O4y">
-                                <rect key="frame" x="238" y="285" width="124" height="30"/>
-                                <state key="normal" title="Change Passcode"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cycleCell" id="1Bg-T3-Lai" customClass="CycleTableViewCell" customModule="MyGraphics" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1Bg-T3-Lai" id="W1v-cJ-jsD">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="cycle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gp6-Do-bcg">
+                                            <rect key="frame" x="16" y="11" width="235" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
                                 <connections>
-                                    <action selector="changePasscodeButtonTap:" destination="gjM-2y-kj8" eventType="touchUpInside" id="bHU-Zp-my0"/>
+                                    <outlet property="titleLabel" destination="Gp6-Do-bcg" id="m93-IY-ZPU"/>
                                 </connections>
-                            </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tIm-ee-1lc">
-                                <rect key="frame" x="230" y="237" width="141" height="31"/>
-                                <subviews>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4fS-W8-vAl">
-                                        <rect key="frame" x="92" y="0.0" width="51" height="31"/>
-                                        <connections>
-                                            <action selector="passcodeSwitchValueChange:" destination="gjM-2y-kj8" eventType="valueChanged" id="Od0-Sf-qpH"/>
-                                        </connections>
-                                    </switch>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Passcode:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BzN-Ah-XuA">
-                                        <rect key="frame" x="0.0" y="5" width="79" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="31" id="69q-BG-jX5"/>
-                                    <constraint firstAttribute="width" constant="141" id="9As-6I-jRF"/>
-                                    <constraint firstItem="BzN-Ah-XuA" firstAttribute="leading" secondItem="tIm-ee-1lc" secondAttribute="leading" id="Edr-Ax-Fsr"/>
-                                    <constraint firstAttribute="bottom" secondItem="BzN-Ah-XuA" secondAttribute="bottom" constant="5" id="Fty-7l-JXF"/>
-                                    <constraint firstItem="BzN-Ah-XuA" firstAttribute="top" secondItem="tIm-ee-1lc" secondAttribute="top" constant="5" id="J2G-re-qfJ"/>
-                                    <constraint firstAttribute="trailing" secondItem="4fS-W8-vAl" secondAttribute="trailing" id="fPp-95-kHx"/>
-                                    <constraint firstItem="4fS-W8-vAl" firstAttribute="top" secondItem="tIm-ee-1lc" secondAttribute="top" id="y8f-BA-NG8"/>
-                                    <constraint firstAttribute="bottom" secondItem="4fS-W8-vAl" secondAttribute="bottom" id="zWt-XJ-MV4"/>
-                                </constraints>
-                            </view>
-                            <pickerView contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ojv-b3-aDV">
-                                <rect key="frame" x="0.0" y="384" width="600" height="216"/>
-                            </pickerView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <gestureRecognizers/>
-                        <constraints>
-                            <constraint firstItem="cMM-Ag-M8Q" firstAttribute="top" secondItem="ojv-b3-aDV" secondAttribute="bottom" id="9bz-pp-Utd"/>
-                            <constraint firstItem="AkC-Y3-O4y" firstAttribute="top" secondItem="tIm-ee-1lc" secondAttribute="bottom" constant="17" id="XJn-ra-myA"/>
-                            <constraint firstItem="tIm-ee-1lc" firstAttribute="centerX" secondItem="7pG-K4-gWV" secondAttribute="centerX" id="k47-UW-1wQ"/>
-                            <constraint firstItem="AkC-Y3-O4y" firstAttribute="centerY" secondItem="7pG-K4-gWV" secondAttribute="centerY" id="r5f-ak-Zx8"/>
-                            <constraint firstItem="AkC-Y3-O4y" firstAttribute="centerX" secondItem="7pG-K4-gWV" secondAttribute="centerX" id="usV-O8-Rc1"/>
-                        </constraints>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="enablePasscodeCell" id="VaQ-X3-yl7" customClass="PasscodeTableViewCell" customModule="MyGraphics" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="136" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VaQ-X3-yl7" id="kV5-kr-DqA">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Passcode:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9T0-oM-lGr">
+                                            <rect key="frame" x="16" y="11" width="167" height="21"/>
+                                            <gestureRecognizers/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bBF-g7-KMI">
+                                            <rect key="frame" x="543" y="6" width="51" height="31"/>
+                                        </switch>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="bBF-g7-KMI" firstAttribute="top" secondItem="kV5-kr-DqA" secondAttribute="topMargin" constant="-2" id="KE5-12-Y8B"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="bBF-g7-KMI" secondAttribute="bottom" constant="-2" id="h32-Ce-WuI"/>
+                                        <constraint firstItem="bBF-g7-KMI" firstAttribute="trailing" secondItem="kV5-kr-DqA" secondAttribute="trailingMargin" id="rPf-C7-0hN"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outlet property="enablePasscodeSwitch" destination="bBF-g7-KMI" id="GsN-4W-j0e"/>
+                                    <outlet property="titleLabel" destination="9T0-oM-lGr" id="EYh-xp-aVq"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
                         <connections>
-                            <outletCollection property="gestureRecognizers" destination="M2a-58-3MV" appends="YES" id="y0Z-JT-j6j"/>
+                            <outlet property="dataSource" destination="ydw-Iz-czm" id="ZxR-FN-Fqq"/>
+                            <outlet property="delegate" destination="ydw-Iz-czm" id="jjc-UO-dUg"/>
                         </connections>
-                    </view>
-                    <connections>
-                        <outlet property="changePasscodeButton" destination="AkC-Y3-O4y" id="3sv-L7-bOy"/>
-                        <outlet property="passcodeSwitch" destination="4fS-W8-vAl" id="edI-va-YKA"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2Rq-EP-dCl" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="M2a-58-3MV"/>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8mA-fc-jc8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1723" y="1048"/>
+            <point key="canvasLocation" x="1790" y="1048"/>
         </scene>
     </scenes>
     <resources>
         <image name="close" width="22" height="22"/>
+        <image name="delete" width="22" height="22"/>
         <image name="save" width="22" height="22"/>
         <image name="setting" width="22" height="22"/>
     </resources>

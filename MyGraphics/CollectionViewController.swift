@@ -20,7 +20,6 @@ class CollectionViewController: UICollectionViewController,CollectionViewWaterfa
     var currentEditState = ProviderEditState.Normal
     let appFilePath = (NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0]) + "/"
     var myImageCollection=[NSManagedObject]()
-    let hour:Double=0.0
     var imagePaths = [String]()
     
     @IBOutlet weak var deleteButton: UIBarButtonItem!
@@ -46,7 +45,7 @@ class CollectionViewController: UICollectionViewController,CollectionViewWaterfa
     @IBAction func chooseImageToDelete(sender: UIBarButtonItem) {
         if (self.currentEditState == ProviderEditState.Normal)
         {
-            self.deleteButton.title = "OK";
+            self.deleteButton.image = UIImage(named: "checkMark")
             self.currentEditState = ProviderEditState.Delete;
             
             for cell in self.collectionView!.visibleCells() as! [CollectionViewCell]
@@ -55,7 +54,7 @@ class CollectionViewController: UICollectionViewController,CollectionViewWaterfa
                 cell.cellImage.userInteractionEnabled = false
             }
         }else{
-            self.deleteButton.title = "delete"
+            self.deleteButton.image = UIImage(named: "delete")
             self.currentEditState = ProviderEditState.Normal
             
             for cell in self.collectionView!.visibleCells() as! [CollectionViewCell]
@@ -105,10 +104,11 @@ class CollectionViewController: UICollectionViewController,CollectionViewWaterfa
         }
     }
     @IBAction func addImage(sender: AnyObject) {
-        let fetchOptions = PHFetchOptions()
+        let hour = fetchUpdateCycle()
         let date = NSDate(timeInterval: -3600*hour, sinceDate: NSDate())
-        let predicate = NSPredicate(format: "creationDate < %@", date)
+        let predicate = NSPredicate(format: "creationDate > %@", date)
         
+        let fetchOptions = PHFetchOptions()
         fetchOptions.predicate = predicate
         let assets = PHAsset.fetchAssetsWithMediaType(.Image, options: fetchOptions)
         let imageRequestOptions = PHImageRequestOptions()
@@ -271,6 +271,21 @@ class CollectionViewController: UICollectionViewController,CollectionViewWaterfa
             print("Could not fetch \(error), \(error.userInfo)")
         }
         return object
+    }
+    func fetchUpdateCycle()->Double {
+        var cycle:Double = 1.0
+        let managedContext = getManagedContext()
+        let fetchRequest = NSFetchRequest(entityName: "Update")
+        do {
+            let object = try managedContext.executeFetchRequest(fetchRequest) as! [NSManagedObject]
+            if object.count > 0{
+                cycle = object[0].valueForKey("cycle") as! Double
+            }
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
+        
+        return cycle
     }
     func getManagedContext()->NSManagedObjectContext{
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
