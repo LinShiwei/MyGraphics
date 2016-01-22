@@ -12,7 +12,7 @@ import CoreData
 
 class PasscodeSettingsTableViewController: UITableViewController{
     
-    var updateCycle : NSManagedObject?
+    var settingObject : NSManagedObject?
     
     private let configuration: PasscodeLockConfigurationType
     
@@ -33,7 +33,9 @@ class PasscodeSettingsTableViewController: UITableViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateCycle = initUpdateCycle()
+        self.tableView.backgroundView = UIView.init()
+        self.tableView.backgroundView?.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        settingObject = initsettingObject()
                 // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -50,7 +52,7 @@ class PasscodeSettingsTableViewController: UITableViewController{
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 2
+        return 3
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -58,6 +60,7 @@ class PasscodeSettingsTableViewController: UITableViewController{
         switch section {
         case 0: return 4
         case 1: return 2
+        case 2: return 3
         default:return 0
         }
         
@@ -67,7 +70,7 @@ class PasscodeSettingsTableViewController: UITableViewController{
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
-            let cell = tableView.dequeueReusableCellWithIdentifier("cycleCell", forIndexPath: indexPath) as! CycleTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("checkMarkCell", forIndexPath: indexPath) as! CycleTableViewCell
             cell.accessoryType = UITableViewCellAccessoryType.None
             switch indexPath.row {
             case 0:
@@ -122,8 +125,30 @@ class PasscodeSettingsTableViewController: UITableViewController{
              
             }
             return cell
+        case 2:
+            let cell = tableView.dequeueReusableCellWithIdentifier("checkMarkCell", forIndexPath: indexPath) as! CycleTableViewCell
+            cell.accessoryType = UITableViewCellAccessoryType.None
+            switch indexPath.row {
+            case 0:
+                cell.titleLabel.text = "分成三列"
+                if isEqualToColumnCount(3){
+                    cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+                }
+            case 1:
+                cell.titleLabel.text = "分成四列"
+                if isEqualToColumnCount(4){
+                    cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+                }
+            case 2:
+                cell.titleLabel.text = "分成五列"
+                if isEqualToColumnCount(5){
+                    cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+                }
+            default:break
+            }
+            return cell
         default:
-            let cell = tableView.dequeueReusableCellWithIdentifier("cycleCell", forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCellWithIdentifier("checkMarkCell", forIndexPath: indexPath)
             return cell
         }
    
@@ -146,7 +171,7 @@ class PasscodeSettingsTableViewController: UITableViewController{
             default:
                 cycle = 1.0
             }
-            updateCycle!.setValue(cycle, forKey: "cycle")
+            settingObject!.setValue(cycle, forKey: "updateCycle")
             saveToCoreData()
             tableView.reloadData()
             
@@ -156,25 +181,40 @@ class PasscodeSettingsTableViewController: UITableViewController{
                 changePasscode()
             default:break
             }
+        case 2:
+            let columnCount:Int?
+            switch indexPath.row {
+            case 0:
+                columnCount = 3
+            case 1:
+                columnCount = 4
+            case 2:
+                columnCount = 5
+            default:
+                columnCount = 3
+            }
+            settingObject!.setValue(columnCount, forKey: "columnCount")
+//            saveToCoreData()
+            tableView.reloadData()
         default:
             break
         }
     }
     // MARK: tableview delegate
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 20
+        return 40
     }
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label = UILabel()
         let font = UIFont.systemFontOfSize(14)
         label.font = font
         label.textColor = UIColor(white: 0.5, alpha: 1)
-        if section == 0 {
-                    label.text = " 同步时间段"
-
-        }else{
-            label.text = " 密码"
+        switch section {
+        case 0: label.text = "    同步时间段"
+        case 1: label.text = "    密码"
+        default:label.text = "    照片列数"
         }
+
         return label
     }
     // MARK: - View
@@ -187,13 +227,12 @@ class PasscodeSettingsTableViewController: UITableViewController{
     }
     override func  viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        let c = updateCycle?.valueForKey("cycle")
+        let c = settingObject?.valueForKey("updateCycle")
         print("\(c)")
     }
     // MARK: 自定义函数
     func passcodeSwitchValueChange(sender:UISwitch){
-        print(sender)
-        print("switch")
+    
         let passcodeVC: PasscodeLockViewController
 //        let cell = sender.superview as! PasscodeTableViewCell
         if sender.on {
@@ -216,20 +255,21 @@ class PasscodeSettingsTableViewController: UITableViewController{
         presentViewController(passcodeLock, animated: true, completion: nil)
         
     }
+    /*
     func fetchUpdateCycle()->Double {
         var cycle:Double = 1.0
         let managedContext = getManagedContext()
-        let fetchRequest = NSFetchRequest(entityName: "Update")
+        let fetchRequest = NSFetchRequest(entityName: "Setting")
         do {
             let object = try managedContext.executeFetchRequest(fetchRequest) as! [NSManagedObject]
             if object.count > 0{
-                cycle = object[0].valueForKey("cycle") as! Double
+                cycle = object[0].valueForKey("updateCycle") as! Double
             }
         } catch let error as NSError {
             print("Could not fetch \(error), \(error.userInfo)")
         }
         return cycle
-    }
+    }*/
     func getManagedContext()->NSManagedObjectContext{
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         return appDelegate.managedObjectContext
@@ -243,39 +283,76 @@ class PasscodeSettingsTableViewController: UITableViewController{
             print("Could not save \(error), \(error.userInfo)")
         }
     }
-    func initUpdateCycle()->NSManagedObject{
+    func initsettingObject()->NSManagedObject{
         let managedContext = getManagedContext()
-        let fetchRequest = NSFetchRequest(entityName: "Update")
+        let fetchRequest = NSFetchRequest(entityName: "Setting")
         var object = [NSManagedObject]()
         do {
             object = try managedContext.executeFetchRequest(fetchRequest) as! [NSManagedObject]
         } catch let error as NSError {
             print("Could not fetch \(error), \(error.userInfo)")
         }
-        if object.count > 0 {
-            return object[0]
-        }else{
-            let entity = NSEntityDescription.entityForName("Update", inManagedObjectContext:managedContext)
-            let cycleObject = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
-            cycleObject.setValue(1.0, forKey: "cycle")
-            do {
-                try managedContext.save()
-            }
-            catch let error as NSError {
-                print("Could not save \(error), \(error.userInfo)")
-            }
-            return cycleObject
-        }
-
+        return object[0]
     }
     func isEqualToCycle(cycle:Double)->Bool{
-        let temp = updateCycle!.valueForKey("cycle") as! Double
+        let temp = settingObject!.valueForKey("updateCycle") as! Double
         if cycle == temp {
             return true
         }else{
             return false
         }
     }
-    
-
+    func isEqualToColumnCount(count:Int)->Bool{
+        let temp = settingObject!.valueForKey("columnCount") as! Int
+        if count == temp {
+            return true
+        }else{
+            return false
+        }
+    }
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if (cell.respondsToSelector(Selector("tintColor"))){
+            if (tableView == self.tableView) {
+                let cornerRadius : CGFloat = 12.0
+                cell.backgroundColor = UIColor.clearColor()
+                let layer: CAShapeLayer = CAShapeLayer()
+                let pathRef:CGMutablePathRef = CGPathCreateMutable()
+                let bounds: CGRect = CGRectInset(cell.bounds, 10, 0) //25->10
+                var addLine: Bool = false
+                
+                if (indexPath.row == 0 && indexPath.row == tableView.numberOfRowsInSection(indexPath.section)-1) {
+                    CGPathAddRoundedRect(pathRef, nil, bounds, cornerRadius, cornerRadius)
+                } else if (indexPath.row == 0) {
+                    CGPathMoveToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMaxY(bounds))
+                    CGPathAddArcToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMinY(bounds), CGRectGetMidX(bounds), CGRectGetMinY(bounds), cornerRadius)
+                    CGPathAddArcToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMinY(bounds), CGRectGetMaxX(bounds), CGRectGetMidY(bounds), cornerRadius)
+                    CGPathAddLineToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMaxY(bounds))
+                    addLine = true
+                } else if (indexPath.row == tableView.numberOfRowsInSection(indexPath.section)-1) {
+                    CGPathMoveToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMinY(bounds))
+                    CGPathAddArcToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMaxY(bounds), CGRectGetMidX(bounds), CGRectGetMaxY(bounds), cornerRadius)
+                    CGPathAddArcToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMaxY(bounds), CGRectGetMaxX(bounds), CGRectGetMidY(bounds), cornerRadius)
+                    CGPathAddLineToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMinY(bounds))
+                } else {
+                    CGPathAddRect(pathRef, nil, bounds)
+                    addLine = true
+                }
+                
+                layer.path = pathRef
+                layer.fillColor = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 0.8).CGColor
+                
+                if (addLine == true) {
+                    let lineLayer: CALayer = CALayer()
+                    let lineHeight: CGFloat = (1.0 / UIScreen.mainScreen().scale)
+                    lineLayer.frame = CGRectMake(CGRectGetMinX(bounds)+10, bounds.size.height-lineHeight, bounds.size.width-10, lineHeight)
+                    lineLayer.backgroundColor = tableView.separatorColor!.CGColor
+                    layer.addSublayer(lineLayer)
+                }
+                let testView: UIView = UIView(frame: bounds)
+                testView.layer.insertSublayer(layer, atIndex: 0)
+                testView.backgroundColor = UIColor.clearColor()
+                cell.backgroundView = testView
+            }
+        }
+    }
 }

@@ -19,10 +19,14 @@ class CollectionViewController: UICollectionViewController,CollectionViewWaterfa
     }
     var currentEditState = ProviderEditState.Normal
     let appFilePath = (NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0]) + "/"
-    var myImageCollection=[NSManagedObject]()
+    var myImageCollection = [NSManagedObject]()
+    var settingObject : NSManagedObject?
     var imagePaths = [String]()
     
+    
+    @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var deleteButton: UIBarButtonItem!
+    
     @IBAction func cellCloseButton(sender: UIButton) {
         let cell = (sender.superview)!.superview as! CollectionViewCell
         let indexPath = self.collectionView!.indexPathForCell(cell)
@@ -104,9 +108,9 @@ class CollectionViewController: UICollectionViewController,CollectionViewWaterfa
         }
     }
     @IBAction func addImage(sender: AnyObject) {
-        let hour = fetchUpdateCycle()
+        let hour = settingObject!.valueForKey("updateCycle") as! Double
         let date = NSDate(timeInterval: -3600*hour, sinceDate: NSDate())
-        let predicate = NSPredicate(format: "creationDate > %@", date)
+        let predicate = NSPredicate(format: "creationDate < %@", date)
         
         let fetchOptions = PHFetchOptions()
         fetchOptions.predicate = predicate
@@ -145,26 +149,27 @@ class CollectionViewController: UICollectionViewController,CollectionViewWaterfa
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        let layout = CollectionViewWaterfallLayout()
-        layout.sectionInset = UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
-        layout.headerInset = UIEdgeInsetsMake(20, 0, 0, 0)
-        layout.headerHeight = 0
-        layout.footerHeight = 0
-        layout.minimumColumnSpacing = 1
-        layout.minimumInteritemSpacing = 1
-        self.collectionView!.collectionViewLayout = layout
-        self.collectionView!.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        settingObject = initsettingObject()
         myImageCollection = fetchImageObject()
-  
+        self.collectionView!.collectionViewLayout = getLayout()
+        
+        self.collectionView!.backgroundColor = UIColor(white: 0.95, alpha: 1)
     }
-
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        shareButton.enabled = false
+        
+        if settingObject!.hasChanges {
+            saveToCoreData()
+            self.collectionView!.collectionViewLayout = getLayout()
+            self.collectionView!.reloadData()
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
 /*
     // MARK: - Navigation
 
@@ -196,8 +201,6 @@ class CollectionViewController: UICollectionViewController,CollectionViewWaterfa
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("imageCell", forIndexPath: indexPath) as! CollectionViewCell
         // Configure the cell
-        cell.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
-        
         let imageURL = getImageURL(myImageCollection, indexPathRow: indexPath.row)
         
         cell.cellImage.setupForImageViewer(NSURL(string: imageURL)!, backgroundColor: UIColor.blackColor())
@@ -216,12 +219,15 @@ class CollectionViewController: UICollectionViewController,CollectionViewWaterfa
             cell.cellImage.userInteractionEnabled = false
 
         }
-        
-    
-        
+        let longPress = UILongPressGestureRecognizer(target: self, action: "longPressToShare")
+////        longPress.delegate = self
+        cell.cellImage.addGestureRecognizer(longPress)
         return cell
     }
-
+    override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+            cell.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        
+    }
     // MARK: UICollectionViewDelegate
 
     /*
@@ -238,7 +244,7 @@ class CollectionViewController: UICollectionViewController,CollectionViewWaterfa
     }
     */
 
-    
+   /*
     // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
     override func collectionView(collectionView: UICollectionView, shouldShowMenuForItemAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
@@ -251,7 +257,87 @@ class CollectionViewController: UICollectionViewController,CollectionViewWaterfa
     override func collectionView(collectionView: UICollectionView, performAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
     
     }
+    */
     
+//    func fetchUpdateCycle()->Double {
+//        var cycle:Double = 1.0
+//        let managedContext = getManagedContext()
+//        let fetchRequest = NSFetchRequest(entityName: "Setting")
+//        do {
+//            let object = try managedContext.executeFetchRequest(fetchRequest) as! [NSManagedObject]
+//            if object.count > 0{
+//                cycle = object[0].valueForKey("updateCycle") as! Double
+//            }
+//        } catch let error as NSError {
+//            print("Could not fetch \(error), \(error.userInfo)")
+//        }
+//        
+//        return cycle
+//    }
+    
+    // MARK: WaterfallLayoutDelegate
+    
+    func collectionView(collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        return cellSize(myImageCollection,indexPathRow: indexPath.item)
+    }
+    //MARK: 自定义函数
+    func cellSize(imageObj:[NSManagedObject],indexPathRow:Int)->CGSize{
+        let imageURL = getImageURL(myImageCollection, indexPathRow: indexPathRow)
+        let image = getImage(imageURL)
+        let size = CGSize(width: image.size.width+9, height: image.size.height+9)
+        return size
+    }
+    func getLayout()->CollectionViewWaterfallLayout{
+        let layout = CollectionViewWaterfallLayout()
+        layout.sectionInset = UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
+        layout.headerInset = UIEdgeInsetsMake(20, 0, 0, 0)
+        layout.headerHeight = 0
+        layout.footerHeight = 0
+        layout.columnCount = settingObject!.valueForKey("columnCount") as! Int
+        layout.minimumColumnSpacing = 1
+        layout.minimumInteritemSpacing = 1
+        return layout
+    }
+    func initsettingObject()->NSManagedObject{
+        let managedContext = getManagedContext()
+        let fetchRequest = NSFetchRequest(entityName: "Setting")
+        var object = [NSManagedObject]()
+        do {
+            object = try managedContext.executeFetchRequest(fetchRequest) as! [NSManagedObject]
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
+        if object.count > 0 {
+            return object[0]
+        }else{
+            let entity = NSEntityDescription.entityForName("Setting", inManagedObjectContext:managedContext)
+            let settingObject = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+            settingObject.setValue(1.0, forKey: "updateCycle")
+            settingObject.setValue(3, forKey: "columnCount")
+            do {
+                try managedContext.save()
+            }
+            catch let error as NSError {
+                print("Could not save \(error), \(error.userInfo)")
+            }
+            return settingObject
+        }
+        
+    }
+    func getManagedContext()->NSManagedObjectContext{
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        return appDelegate.managedObjectContext
+    }
+    func getImage(imageURL:String)->UIImage{
+        return UIImage(contentsOfFile: imageURL)!
+    }
+    func getImageURL(imageObj:[NSManagedObject],indexPathRow:Int)->String{
+        let imageName = imageObj[indexPathRow].valueForKey("name") as! String
+        let appFilePath = (NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0]) + "/"
+        let path = appFilePath + imageName
+        return path
+        
+    }
     func saveToCoreData() {
         let managedContext = getManagedContext()
         do {
@@ -272,47 +358,12 @@ class CollectionViewController: UICollectionViewController,CollectionViewWaterfa
         }
         return object
     }
-    func fetchUpdateCycle()->Double {
-        var cycle:Double = 1.0
-        let managedContext = getManagedContext()
-        let fetchRequest = NSFetchRequest(entityName: "Update")
-        do {
-            let object = try managedContext.executeFetchRequest(fetchRequest) as! [NSManagedObject]
-            if object.count > 0{
-                cycle = object[0].valueForKey("cycle") as! Double
-            }
-        } catch let error as NSError {
-            print("Could not fetch \(error), \(error.userInfo)")
-        }
-        
-        return cycle
-    }
-    func getManagedContext()->NSManagedObjectContext{
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        return appDelegate.managedObjectContext
-    }
-    func getImage(imageURL:String)->UIImage{
-        return UIImage(contentsOfFile: imageURL)!
-    }
-    func getImageURL(imageObj:[NSManagedObject],indexPathRow:Int)->String{
-        let imageName = imageObj[indexPathRow].valueForKey("name") as! String
-        let appFilePath = (NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0]) + "/"
-        let path = appFilePath + imageName
-        return path
+    func longPressToShare(){
+        shareButton.enabled = true
+        let shareTableViewController = self.storyboard!.instantiateViewControllerWithIdentifier("shareTableViewController")
+        shareTableViewController.popoverPresentationController?.sourceView = self.collectionView
+        presentViewController(shareTableViewController,animated: true, completion:nil)
         
     }
-    // MARK: WaterfallLayoutDelegate
-    
-    func collectionView(collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return cellSize(myImageCollection,indexPathRow: indexPath.item)
-    }
-    //MARK: 自定义函数
-    func cellSize(imageObj:[NSManagedObject],indexPathRow:Int)->CGSize{
-        let imageURL = getImageURL(myImageCollection, indexPathRow: indexPathRow)
-        let image = getImage(imageURL)
-        let size = CGSize(width: image.size.width+9, height: image.size.height+9)
-        return size
-    }
-
 }
 
