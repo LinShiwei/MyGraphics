@@ -28,35 +28,21 @@
                                     <rect key="frame" x="0.0" y="0.0" width="149" height="153"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8jA-A3-vvF">
-                                            <rect key="frame" x="9" y="9" width="140" height="144"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8jA-A3-vvF">
+                                            <rect key="frame" x="2" y="2" width="145" height="149"/>
                                             <gestureRecognizers/>
                                         </imageView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ndk-Cg-Ulp">
-                                            <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="22" id="70S-2b-fkY"/>
-                                                <constraint firstAttribute="height" constant="22" id="gWZ-Zc-Sms"/>
-                                            </constraints>
-                                            <state key="normal" image="close"/>
-                                            <connections>
-                                                <action selector="cellCloseButton:" destination="90N-Rw-FeP" eventType="touchUpInside" id="gl5-f1-ARg"/>
-                                            </connections>
-                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <constraints>
-                                    <constraint firstItem="ndk-Cg-Ulp" firstAttribute="leading" secondItem="HxC-7K-peO" secondAttribute="leadingMargin" constant="-8" id="Fgf-dg-I3B"/>
-                                    <constraint firstItem="ndk-Cg-Ulp" firstAttribute="top" secondItem="HxC-7K-peO" secondAttribute="topMargin" constant="-8" id="UvK-Zt-Bi6"/>
-                                    <constraint firstAttribute="bottomMargin" secondItem="8jA-A3-vvF" secondAttribute="bottom" constant="-8" id="l04-EA-fTR"/>
-                                    <constraint firstAttribute="trailingMargin" secondItem="8jA-A3-vvF" secondAttribute="trailing" constant="-7" id="tk2-Mg-wNk"/>
-                                    <constraint firstItem="8jA-A3-vvF" firstAttribute="top" secondItem="HxC-7K-peO" secondAttribute="topMargin" constant="1" id="wsI-xT-mi8"/>
-                                    <constraint firstItem="8jA-A3-vvF" firstAttribute="leading" secondItem="HxC-7K-peO" secondAttribute="leadingMargin" id="zjf-gm-0ar"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="8jA-A3-vvF" secondAttribute="trailing" constant="-6" id="8Qm-3m-MI9"/>
+                                    <constraint firstItem="8jA-A3-vvF" firstAttribute="top" secondItem="HxC-7K-peO" secondAttribute="topMargin" constant="-6" id="HQQ-OF-Mrg"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="8jA-A3-vvF" secondAttribute="bottom" constant="-6" id="QQH-Tc-cDT"/>
+                                    <constraint firstItem="8jA-A3-vvF" firstAttribute="leading" secondItem="HxC-7K-peO" secondAttribute="leadingMargin" constant="-6" id="Xc0-7h-oRK"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="cellImage" destination="8jA-A3-vvF" id="cEf-mw-sZE"/>
-                                    <outlet property="closeButton" destination="ndk-Cg-Ulp" id="qgc-Ar-YmD"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -66,11 +52,20 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="My collection" id="Inz-Op-Yi3">
-                        <barButtonItem key="leftBarButtonItem" image="delete" id="G4G-Kg-UvY">
-                            <connections>
-                                <action selector="chooseImageToDelete:" destination="90N-Rw-FeP" id="V1M-xs-6Lm"/>
-                            </connections>
-                        </barButtonItem>
+                        <leftBarButtonItems>
+                            <barButtonItem image="delete" id="G4G-Kg-UvY">
+                                <connections>
+                                    <action selector="chooseImageToDelete:" destination="90N-Rw-FeP" id="V1M-xs-6Lm"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="action" id="rhV-m1-DAN">
+                                <connections>
+                                    <segue destination="7pl-wt-vmz" kind="popoverPresentation" identifier="share" popoverAnchorBarButtonItem="rhV-m1-DAN" id="OVp-J7-MFo">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="PCq-9c-IBC">
                                 <connections>
@@ -87,16 +82,15 @@
                                     <segue destination="ydw-Iz-czm" kind="show" id="BR6-7A-3yc"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem systemItem="action" id="rhV-m1-DAN">
+                            <barButtonItem title="选择" id="cPw-L6-f0w">
                                 <connections>
-                                    <segue destination="7pl-wt-vmz" kind="popoverPresentation" popoverAnchorBarButtonItem="rhV-m1-DAN" id="OVp-J7-MFo">
-                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                    </segue>
+                                    <action selector="chooseButton:" destination="90N-Rw-FeP" id="vji-db-oUK"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="chooseButton" destination="cPw-L6-f0w" id="FAx-yK-nZO"/>
                         <outlet property="deleteButton" destination="G4G-Kg-UvY" id="GgH-If-82O"/>
                         <outlet property="shareButton" destination="rhV-m1-DAN" id="UnT-cU-0RI"/>
                     </connections>
@@ -246,7 +240,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="close" width="22" height="22"/>
         <image name="delete" width="22" height="22"/>
         <image name="save" width="22" height="22"/>
         <image name="setting" width="22" height="22"/>
