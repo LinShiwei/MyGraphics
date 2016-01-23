@@ -58,7 +58,7 @@ class PasscodeSettingsTableViewController: UITableViewController{
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         switch section {
-        case 0: return 4
+        case 0: return 5
         case 1: return 2
         case 2: return 3
         default:return 0
@@ -91,6 +91,11 @@ class PasscodeSettingsTableViewController: UITableViewController{
             case 3:
                 cell.titleLabel.text = "过去一周"
                 if isEqualToCycle(24.0*7){
+                    cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+                }
+            case 4:
+                cell.titleLabel.text = "过去所有"
+                if isEqualToCycle(0.0){
                     cell.accessoryType = UITableViewCellAccessoryType.Checkmark
                 }
             default:break
@@ -168,6 +173,8 @@ class PasscodeSettingsTableViewController: UITableViewController{
                 cycle = 24.0
             case 3:
                 cycle = 24.0*7
+            case 4:
+                cycle = 0.0
             default:
                 cycle = 1.0
             }

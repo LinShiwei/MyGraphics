@@ -7,10 +7,10 @@
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
-        <!--My collection-->
+        <!--秘密相册-->
         <scene sceneID="yDc-CJ-R70">
             <objects>
-                <collectionViewController id="90N-Rw-FeP" customClass="CollectionViewController" customModule="MyGraphics" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController id="90N-Rw-FeP" customClass="CollectionViewController" customModule="秘密相册" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="UCj-Ev-NSD">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -21,7 +21,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imageCell" id="HxC-7K-peO" customClass="CollectionViewCell" customModule="MyGraphics" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imageCell" id="HxC-7K-peO" customClass="CollectionViewCell" customModule="秘密相册" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="64" width="149" height="153"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -51,7 +51,7 @@
                             <outlet property="delegate" destination="90N-Rw-FeP" id="9Xq-7H-dWe"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="My collection" id="Inz-Op-Yi3">
+                    <navigationItem key="navigationItem" title="秘密相册" id="Inz-Op-Yi3">
                         <leftBarButtonItems>
                             <barButtonItem image="delete" id="G4G-Kg-UvY">
                                 <connections>
@@ -121,7 +121,7 @@
         <!--Share List Table View Controller-->
         <scene sceneID="wLG-ff-uf4">
             <objects>
-                <tableViewController storyboardIdentifier="shareTableViewController" modalPresentationStyle="formSheet" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7pl-wt-vmz" customClass="ShareListTableViewController" customModule="MyGraphics" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="shareTableViewController" modalPresentationStyle="formSheet" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7pl-wt-vmz" customClass="ShareListTableViewController" customModule="秘密相册" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="uPL-vE-oYW">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -129,7 +129,7 @@
                         <color key="separatorColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="shareListCell" id="LAS-Nf-3AN" customClass="ShareListTableViewCell" customModule="MyGraphics" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="shareListCell" id="LAS-Nf-3AN" customClass="ShareListTableViewCell" customModule="秘密相册" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LAS-Nf-3AN" id="AUn-h1-fuW">
@@ -171,14 +171,14 @@
         <!--Passcode Settings Table View Controller-->
         <scene sceneID="MPJ-lN-Wq4">
             <objects>
-                <tableViewController id="ydw-Iz-czm" customClass="PasscodeSettingsTableViewController" customModule="MyGraphics" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="ydw-Iz-czm" customClass="PasscodeSettingsTableViewController" customModule="秘密相册" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="dUw-7O-3Cf">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="separatorColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="checkMarkCell" id="1Bg-T3-Lai" customClass="CycleTableViewCell" customModule="MyGraphics" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="checkMarkCell" id="1Bg-T3-Lai" customClass="CycleTableViewCell" customModule="秘密相册" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1Bg-T3-Lai" id="W1v-cJ-jsD">
@@ -197,7 +197,7 @@
                                     <outlet property="titleLabel" destination="Gp6-Do-bcg" id="m93-IY-ZPU"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="enablePasscodeCell" id="VaQ-X3-yl7" customClass="PasscodeTableViewCell" customModule="MyGraphics" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="enablePasscodeCell" id="VaQ-X3-yl7" customClass="PasscodeTableViewCell" customModule="秘密相册" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="136" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VaQ-X3-yl7" id="kV5-kr-DqA">
@@ -240,7 +240,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="delete" width="22" height="22"/>
+        <image name="delete" width="29" height="29"/>
         <image name="save" width="22" height="22"/>
         <image name="setting" width="22" height="22"/>
     </resources>

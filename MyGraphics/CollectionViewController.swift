@@ -111,8 +111,12 @@ class CollectionViewController: UICollectionViewController,CollectionViewWaterfa
     @IBAction func addImage(sender: AnyObject) {
         let hour = settingObject!.valueForKey("updateCycle") as! Double
         let date = NSDate(timeInterval: -3600*hour, sinceDate: NSDate())
-        let predicate = NSPredicate(format: "creationDate < %@", date)
-        
+        let predicate:NSPredicate
+        if hour == 0.0{
+            predicate = NSPredicate(format: "creationDate < %@", date)
+        }else{
+            predicate = NSPredicate(format: "creationDate > %@", date)
+        }
         let fetchOptions = PHFetchOptions()
         fetchOptions.predicate = predicate
         let assets = PHAsset.fetchAssetsWithMediaType(.Image, options: fetchOptions)
