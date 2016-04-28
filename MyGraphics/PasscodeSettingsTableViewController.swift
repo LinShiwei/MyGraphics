@@ -36,27 +36,19 @@ class PasscodeSettingsTableViewController: UITableViewController{
         self.tableView.backgroundView = UIView.init()
         self.tableView.backgroundView?.backgroundColor = UIColor(white: 0.95, alpha: 1)
         settingObject = initsettingObject()
-                // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // MARK: - Table view data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 3
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         switch section {
         case 0: return 5
         case 1: return 2
@@ -65,8 +57,7 @@ class PasscodeSettingsTableViewController: UITableViewController{
         }
         
     }
-    
-    
+
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
@@ -160,7 +151,6 @@ class PasscodeSettingsTableViewController: UITableViewController{
     }
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
-        print("\(indexPath.section)  \(indexPath.row)")
         switch indexPath.section {
         case 0:
             let cycle:Double?
@@ -181,7 +171,6 @@ class PasscodeSettingsTableViewController: UITableViewController{
             settingObject!.setValue(cycle, forKey: "updateCycle")
             saveToCoreData()
             tableView.reloadData()
-            
         case 1:
             switch indexPath.row {
             case 1:
@@ -201,7 +190,6 @@ class PasscodeSettingsTableViewController: UITableViewController{
                 columnCount = 3
             }
             settingObject!.setValue(columnCount, forKey: "columnCount")
-//            saveToCoreData()
             tableView.reloadData()
         default:
             break
@@ -225,7 +213,6 @@ class PasscodeSettingsTableViewController: UITableViewController{
         return label
     }
     // MARK: - View
-    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -234,21 +221,16 @@ class PasscodeSettingsTableViewController: UITableViewController{
     }
     override func  viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        let c = settingObject?.valueForKey("updateCycle")
-        print("\(c)")
     }
     // MARK: 自定义函数
     func passcodeSwitchValueChange(sender:UISwitch){
     
         let passcodeVC: PasscodeLockViewController
-//        let cell = sender.superview as! PasscodeTableViewCell
         if sender.on {
             passcodeVC = PasscodeLockViewController(state: .SetPasscode, configuration: configuration)
         }else{
             passcodeVC = PasscodeLockViewController(state: .RemovePasscode, configuration: configuration)
-            
             passcodeVC.successCallback = { lock in
-                
                 lock.repository.deletePasscode()
             }
         }
@@ -257,7 +239,6 @@ class PasscodeSettingsTableViewController: UITableViewController{
     func changePasscode() {
         let repo = UserDefaultsPasscodeRepository()
         let config = PasscodeLockConfiguration(repository: repo)
-        
         let passcodeLock = PasscodeLockViewController(state: .ChangePasscode, configuration: config)
         presentViewController(passcodeLock, animated: true, completion: nil)
         

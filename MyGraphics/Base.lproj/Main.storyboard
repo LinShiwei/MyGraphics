@@ -116,7 +116,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9RL-g6-nt3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="430" y="1048"/>
+            <point key="canvasLocation" x="313" y="1048"/>
         </scene>
         <!--Share List Table View Controller-->
         <scene sceneID="wLG-ff-uf4">

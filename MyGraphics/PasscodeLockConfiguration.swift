@@ -18,12 +18,10 @@ struct PasscodeLockConfiguration: PasscodeLockConfigurationType {
     let maximumInccorectPasscodeAttempts = -1
     
     init(repository: PasscodeRepositoryType) {
-        
         self.repository = repository
     }
     
     init() {
-        
         self.repository = UserDefaultsPasscodeRepository()
     }
 }

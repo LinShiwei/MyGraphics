@@ -11,7 +11,7 @@ import CoreData
 import Photos
 import ImageViewer
 
-class CollectionViewController: UICollectionViewController,CollectionViewWaterfallLayoutDelegate  {
+class CollectionViewController: UICollectionViewController{
     //MARK: 自定义变量
     enum ProviderEditState {
         case Normal
@@ -36,8 +36,7 @@ class CollectionViewController: UICollectionViewController,CollectionViewWaterfa
             deleteButton.enabled = true
             self.collectionView!.allowsSelection = true
             self.collectionView!.allowsMultipleSelection = true
-            for cell in self.collectionView!.visibleCells() as! [CollectionViewCell]
-            {
+            for cell in self.collectionView!.visibleCells() as! [CollectionViewCell]{
                 cell.cellImage.userInteractionEnabled = false
             }
         }else{
@@ -47,8 +46,7 @@ class CollectionViewController: UICollectionViewController,CollectionViewWaterfa
             deleteButton.enabled = false
             self.collectionView!.allowsMultipleSelection = false
             self.collectionView!.allowsSelection = false
-            for cell in self.collectionView!.visibleCells() as! [CollectionViewCell]
-            {
+            for cell in self.collectionView!.visibleCells() as! [CollectionViewCell]{
                 cell.cellImage.userInteractionEnabled = true
             }
         }
@@ -67,7 +65,6 @@ class CollectionViewController: UICollectionViewController,CollectionViewWaterfa
                         indexPath[i + 1] = temp
                         }
                     }
-                    
                 }
             }
             let managedContext = getManagedContext()
@@ -76,35 +73,28 @@ class CollectionViewController: UICollectionViewController,CollectionViewWaterfa
                 self.myImageCollection.removeAtIndex(path.row)
             }
             do {
-                    try managedContext.save()
-                }
-                catch let error as NSError {
-                    print("Could not save \(error), \(error.userInfo)")
-                }
+                try managedContext.save()
+            }catch let error as NSError {
+                print("Could not save \(error), \(error.userInfo)")
+            }
             self.collectionView!.performBatchUpdates({
                 self.collectionView!.deleteItemsAtIndexPaths(indexPath)
                 return
                 }, completion: nil)
         }
-        
-    
-
     }
     @IBAction func saveToPhotoAlbum(sender: UIBarButtonItem) {
         if myImageCollection.count > 0{
             for index in 0...myImageCollection.count - 1 {
                 let imageURL = getImageURL(myImageCollection, indexPathRow: index)
                 imagePaths.append(imageURL)
-               
             }
             self.saveNextImage()
-           
         }else{
             let alert = UIAlertController(title: "Fail", message: "There is no photo to save", preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "OK", style: .Default) { (action: UIAlertAction) -> Void in }
             alert.addAction(okAction)
             presentViewController(alert, animated: true, completion: nil)
-
         }
     }
     @IBAction func addImage(sender: AnyObject) {
@@ -160,44 +150,33 @@ class CollectionViewController: UICollectionViewController,CollectionViewWaterfa
         deleteButton.enabled = false
         self.collectionView!.collectionViewLayout = getLayout()
         self.collectionView!.backgroundColor = UIColor(white: 0.95, alpha: 1)
-        print("\(appFilePath)")
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         if settingObject!.hasChanges {
             saveToCoreData()
             self.collectionView!.collectionViewLayout = getLayout()
-            self.collectionView!.reloadData()
         }
     }
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-//        currentEditState = ProviderEditState.Normal
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     // MARK: - Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
         if segue.identifier == "share" {
-            print("segue")
             let controller = segue.destinationViewController as! ShareListTableViewController
             controller.indexPath = (self.collectionView!.indexPathsForSelectedItems())!
             controller.imageManagedObject = myImageCollection
         }
        
     }
-
     // MARK: UICollectionViewDataSource
-
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
-
-
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return myImageCollection.count
     }
@@ -212,28 +191,17 @@ class CollectionViewController: UICollectionViewController,CollectionViewWaterfa
         
         cell.cellImage.setupForImageViewer(NSURL(string: imageURL)!, backgroundColor: UIColor.blackColor())
         cell.cellImage.image = getImage(imageURL)
-//        cellPaths[indexPath.row] =indexPath
-        if(self.currentEditState == ProviderEditState.Normal)
-        {
+        if(self.currentEditState == ProviderEditState.Normal){
             cell.cellImage.userInteractionEnabled = true
-
-        }
-        else
-        {
+        }else{
             cell.cellImage.userInteractionEnabled = false
-
         }
         return cell
     }
     override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
             cell.backgroundColor = UIColor(white: 0.95, alpha: 1)
-        
     }
-    // MARK: WaterfallLayoutDelegate
-    
-    func collectionView(collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return cellSize(myImageCollection,indexPathRow: indexPath.item)
-    }
+
     //MARK: 自定义函数
     func cellSize(imageObj:[NSManagedObject],indexPathRow:Int)->CGSize{
         let imageURL = getImageURL(myImageCollection, indexPathRow: indexPathRow)
@@ -341,4 +309,9 @@ class CollectionViewController: UICollectionViewController,CollectionViewWaterfa
         }
     }
 }
-
+// MARK: WaterfallLayoutDelegate
+extension CollectionViewController : CollectionViewWaterfallLayoutDelegate{
+    func collectionView(collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        return cellSize(myImageCollection,indexPathRow: indexPath.item)
+    }
+}

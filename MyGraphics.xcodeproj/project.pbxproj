@@ -86,6 +86,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		566C03691CD1AA5F0011EF36 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				56E5BD211C4A1E190068C46C /* CollectionViewWaterfallLayout.swift */,
+				56E546961C37919700935EB5 /* AppDelegate.swift */,
+				56E5469A1C37919700935EB5 /* Main.storyboard */,
+				56E546A01C37919700935EB5 /* Assets.xcassets */,
+				56E546A21C37919700935EB5 /* LaunchScreen.storyboard */,
+				56EB5D7B1C4F7F10003AC611 /* MyGraphics.xcdatamodeld */,
+				56E546A51C37919700935EB5 /* Info.plist */,
+				569E6A4D1C522CE5004623A3 /* MyGraphics-Bridging-Header.h */,
+			);
+			name = Support;
+			sourceTree = "<group>";
+		};
 		569E6A401C522B01004623A3 /* Wechat */ = {
 			isa = PBXGroup;
 			children = (
@@ -126,18 +141,11 @@
 			isa = PBXGroup;
 			children = (
 				56EFDDE41C4CB0710094C3FB /* PasscodeLockFile */,
-				56E5BD211C4A1E190068C46C /* CollectionViewWaterfallLayout.swift */,
-				56E546961C37919700935EB5 /* AppDelegate.swift */,
 				56E546AB1C37A8D900935EB5 /* CollectionViewController.swift */,
 				56E546AD1C37A9A900935EB5 /* CollectionViewCell.swift */,
 				569E6A571C5251F9004623A3 /* ShareListTableViewController.swift */,
 				569E6A591C52543C004623A3 /* ShareListTableViewCell.swift */,
-				56E5469A1C37919700935EB5 /* Main.storyboard */,
-				56E546A01C37919700935EB5 /* Assets.xcassets */,
-				56E546A21C37919700935EB5 /* LaunchScreen.storyboard */,
-				56EB5D7B1C4F7F10003AC611 /* MyGraphics.xcdatamodeld */,
-				56E546A51C37919700935EB5 /* Info.plist */,
-				569E6A4D1C522CE5004623A3 /* MyGraphics-Bridging-Header.h */,
+				566C03691CD1AA5F0011EF36 /* Support */,
 			);
 			path = MyGraphics;
 			sourceTree = "<group>";
