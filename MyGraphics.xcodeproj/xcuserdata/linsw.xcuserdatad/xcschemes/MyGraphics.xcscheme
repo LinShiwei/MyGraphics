@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "56E546921C37919700935EB5"
-               BuildableName = "MyGraphics.app"
+               BuildableName = "&#x79d8;&#x5bc6;&#x76f8;&#x518c;.app"
                BlueprintName = "MyGraphics"
                ReferencedContainer = "container:MyGraphics.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "56E546921C37919700935EB5"
-            BuildableName = "MyGraphics.app"
+            BuildableName = "&#x79d8;&#x5bc6;&#x76f8;&#x518c;.app"
             BlueprintName = "MyGraphics"
             ReferencedContainer = "container:MyGraphics.xcodeproj">
          </BuildableReference>
@@ -56,7 +56,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "56E546921C37919700935EB5"
-            BuildableName = "MyGraphics.app"
+            BuildableName = "&#x79d8;&#x5bc6;&#x76f8;&#x518c;.app"
             BlueprintName = "MyGraphics"
             ReferencedContainer = "container:MyGraphics.xcodeproj">
          </BuildableReference>
@@ -75,7 +75,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "56E546921C37919700935EB5"
-            BuildableName = "MyGraphics.app"
+            BuildableName = "&#x79d8;&#x5bc6;&#x76f8;&#x518c;.app"
             BlueprintName = "MyGraphics"
             ReferencedContainer = "container:MyGraphics.xcodeproj">
          </BuildableReference>

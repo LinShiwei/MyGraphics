@@ -46,7 +46,7 @@
 		569E6A551C52360D004623A3 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		569E6A571C5251F9004623A3 /* ShareListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareListTableViewController.swift; sourceTree = "<group>"; };
 		569E6A591C52543C004623A3 /* ShareListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareListTableViewCell.swift; sourceTree = "<group>"; };
-		56E546931C37919700935EB5 /* MyGraphics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyGraphics.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		56E546931C37919700935EB5 /* 秘密相册.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "秘密相册.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		56E546961C37919700935EB5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56E5469B1C37919700935EB5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		56E546A01C37919700935EB5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -117,7 +117,7 @@
 		56E546941C37919700935EB5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				56E546931C37919700935EB5 /* MyGraphics.app */,
+				56E546931C37919700935EB5 /* 秘密相册.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -180,7 +180,7 @@
 			);
 			name = MyGraphics;
 			productName = MyGraphics;
-			productReference = 56E546931C37919700935EB5 /* MyGraphics.app */;
+			productReference = 56E546931C37919700935EB5 /* 秘密相册.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -390,7 +390,7 @@
 					"$(PROJECT_DIR)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = lsw.self.MyGraphics;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "秘密相册";
 				SWIFT_OBJC_BRIDGING_HEADER = "MyGraphics/MyGraphics-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -413,7 +413,7 @@
 					"$(PROJECT_DIR)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = lsw.self.MyGraphics;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "秘密相册";
 				SWIFT_OBJC_BRIDGING_HEADER = "MyGraphics/MyGraphics-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
