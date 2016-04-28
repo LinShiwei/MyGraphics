@@ -107,7 +107,6 @@ class CollectionViewController: UICollectionViewController,CollectionViewWaterfa
 
         }
     }
-    
     @IBAction func addImage(sender: AnyObject) {
         let hour = settingObject!.valueForKey("updateCycle") as! Double
         let date = NSDate(timeInterval: -3600*hour, sinceDate: NSDate())
@@ -161,12 +160,10 @@ class CollectionViewController: UICollectionViewController,CollectionViewWaterfa
         deleteButton.enabled = false
         self.collectionView!.collectionViewLayout = getLayout()
         self.collectionView!.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        print("\(appFilePath)")
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-//        shareButton.enabled = false
-//        deleteButton.enabled = false
-//        currentEditState = ProviderEditState.Normal
         if settingObject!.hasChanges {
             saveToCoreData()
             self.collectionView!.collectionViewLayout = getLayout()
@@ -182,8 +179,6 @@ class CollectionViewController: UICollectionViewController,CollectionViewWaterfa
         // Dispose of any resources that can be recreated.
     }
     // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
@@ -199,13 +194,11 @@ class CollectionViewController: UICollectionViewController,CollectionViewWaterfa
     // MARK: UICollectionViewDataSource
 
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
         return myImageCollection.count
     }
 
@@ -230,47 +223,12 @@ class CollectionViewController: UICollectionViewController,CollectionViewWaterfa
             cell.cellImage.userInteractionEnabled = false
 
         }
-//        let longPress = UILongPressGestureRecognizer(target: self, action: "longPressToShare")
-//////        longPress.delegate = self
-//        cell.cellImage.addGestureRecognizer(longPress)
         return cell
     }
     override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
             cell.backgroundColor = UIColor(white: 0.95, alpha: 1)
         
     }
-    
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    */
-
-   /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(collectionView: UICollectionView, shouldShowMenuForItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-
-    override func collectionView(collectionView: UICollectionView, canPerformAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
-        return true
-    }
-
-    override func collectionView(collectionView: UICollectionView, performAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
-    
-    }
-    */
-
     // MARK: WaterfallLayoutDelegate
     
     func collectionView(collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
