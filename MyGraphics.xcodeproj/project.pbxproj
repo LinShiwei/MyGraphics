@@ -401,7 +401,7 @@
 				PRODUCT_NAME = "秘密相册";
 				SWIFT_OBJC_BRIDGING_HEADER = "MyGraphics/MyGraphics-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -423,7 +423,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = lsw.self.MyGraphics;
 				PRODUCT_NAME = "秘密相册";
 				SWIFT_OBJC_BRIDGING_HEADER = "MyGraphics/MyGraphics-Bridging-Header.h";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};

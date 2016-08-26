@@ -105,7 +105,7 @@ class PasscodeSettingsTableViewController: UITableViewController{
                 }
                 cell.enablePasscodeSwitch.hidden = false
                 cell.enablePasscodeSwitch.on = hasPasscode
-                cell.enablePasscodeSwitch.addTarget(self, action: "passcodeSwitchValueChange:", forControlEvents: UIControlEvents.ValueChanged)
+                cell.enablePasscodeSwitch.addTarget(self, action: #selector(PasscodeSettingsTableViewController.passcodeSwitchValueChange(_:)), forControlEvents: UIControlEvents.ValueChanged)
             case 1:
                 cell.titleLabel.text = "修改密码"
                 cell.enablePasscodeSwitch.hidden = true

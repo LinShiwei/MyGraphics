@@ -8,6 +8,7 @@
 
 import UIKit
 import XCTest
+@testable import Haneke
 
 class DiskCacheTests: XCTestCase {
 
@@ -245,10 +246,9 @@ class DiskCacheTests: XCTestCase {
             expectation.fulfill()
             XCTAssertEqual($0, data)
         })
-        
-        dispatch_sync(sut.cacheQueue) {
-            self.waitForExpectationsWithTimeout(0, handler: nil)
-        }
+
+        dispatch_sync(sut.cacheQueue) {}
+        self.waitForExpectationsWithTimeout(1, handler: nil)
     }
     
     func testFetchData_Inexisting() {
@@ -262,10 +262,9 @@ class DiskCacheTests: XCTestCase {
             XCTFail("Expected failure")
             expectation.fulfill()
         }
-        
-        dispatch_sync(sut.cacheQueue) {
-            self.waitForExpectationsWithTimeout(0, handler: nil)
-        }
+
+        dispatch_sync(sut.cacheQueue) {}
+        self.waitForExpectationsWithTimeout(1, handler: nil)
     }
     
     func testFetchData_Inexisting_NilFailureBlock() {
@@ -279,6 +278,7 @@ class DiskCacheTests: XCTestCase {
     }
     
     func testFetchData_UpdateAccessDate() {
+        let now = NSDate()
         let data = NSData.dataWithLength(19)
         let key = self.name
         sut.setData(data, key : key)
@@ -293,26 +293,25 @@ class DiskCacheTests: XCTestCase {
         dispatch_sync(sut.cacheQueue) {
             let attributes = try! fileManager.attributesOfItemAtPath(path)
             let accessDate = attributes[NSFileModificationDate] as! NSDate
-            XCTAssertEqual(accessDate, NSDate.distantPast())
+            XCTAssertTrue(accessDate.laterDate(now).isEqualToDate(now))
         }
         
         sut.fetchData(key: key, success: {
             expectation.fulfill()
             XCTAssertEqual($0, data)
         })
-        
-        dispatch_sync(sut.cacheQueue) {
-            self.waitForExpectationsWithTimeout(0, handler: nil)
-            
-            let attributes = try! fileManager.attributesOfItemAtPath(path)
-            let accessDate = attributes[NSFileModificationDate] as! NSDate
-            let now = NSDate()
-            let interval = accessDate.timeIntervalSinceDate(now)
-            XCTAssertEqualWithAccuracy(interval, 0, accuracy: 1)
-        }
+
+        dispatch_sync(sut.cacheQueue) {}
+        self.waitForExpectationsWithTimeout(1, handler: nil)
+
+        let attributes = try! fileManager.attributesOfItemAtPath(path)
+        let accessDate = attributes[NSFileModificationDate] as! NSDate
+        let interval = accessDate.timeIntervalSinceDate(now)
+        XCTAssertEqualWithAccuracy(interval, 0, accuracy: 1)
     }
-    
+
     func testUpdateAccessDateFileInDisk() {
+        let now = NSDate()
         let data = NSData.dataWithLength(10)
         let key = self.name
         sut.setData(data, key : key)
@@ -326,7 +325,7 @@ class DiskCacheTests: XCTestCase {
         dispatch_sync(sut.cacheQueue) {
             let attributes = try! fileManager.attributesOfItemAtPath(path)
             let accessDate = attributes[NSFileModificationDate] as! NSDate
-            XCTAssertEqual(accessDate, NSDate.distantPast())
+            XCTAssertTrue(accessDate.laterDate(now).isEqualToDate(now))
         }
         
         sut.updateAccessDate(data, key: key)

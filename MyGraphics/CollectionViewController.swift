@@ -189,7 +189,10 @@ class CollectionViewController: UICollectionViewController{
         cell.selectedBackgroundView = UIView.init()
         cell.selectedBackgroundView?.backgroundColor = UIColor(red: 0/255, green: 128/255, blue: 255/255, alpha: 1)
         
-        cell.cellImage.setupForImageViewer(NSURL(string: imageURL)!, backgroundColor: UIColor.blackColor())
+//        cell.cellImage.setupForImageViewer(NSURL(string: imageURL)!, backgroundColor: UIColor.blackColor())
+        
+        cell.cellImage.setupForImageViewer(UIColor.blackColor())
+
         cell.cellImage.image = getImage(imageURL)
         if(self.currentEditState == ProviderEditState.Normal){
             cell.cellImage.userInteractionEnabled = true
@@ -290,7 +293,7 @@ class CollectionViewController: UICollectionViewController{
     func saveNextImage(){
         if imagePaths.count > 0 {
             let image = getImage(imagePaths.last!)
-            UIImageWriteToSavedPhotosAlbum(image, self, "imageSavedToPhotosAlbum:didFinishSavingWithError:contextInfo:", nil)
+            UIImageWriteToSavedPhotosAlbum(image, self, #selector(CollectionViewController.imageSavedToPhotosAlbum(_:didFinishSavingWithError:contextInfo:)), nil)
             imagePaths.removeLast()
         }
         
